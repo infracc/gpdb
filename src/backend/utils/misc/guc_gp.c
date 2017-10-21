@@ -548,6 +548,7 @@ static char *gp_server_version_string;
 /* Query Metrics */
 bool		gp_enable_query_metrics = true;
 int			gp_query_metrics_port = 9898;
+int			gp_max_shmem_instruments = 30000;
 
 /* Security */
 bool		gp_reject_internal_tcp_conn = true;
@@ -4346,6 +4347,15 @@ struct config_int ConfigureNamesInt_gp[] =
 		},
 		&gp_query_metrics_port,
 		9898, 1024, 65535, NULL, NULL
+	},
+
+	{
+		{"gp_max_shmem_instruments", PGC_POSTMASTER, UNGROUPED,
+			gettext_noop("Max number of instrument slots reserved on shmem."),
+			NULL,
+		},
+		&gp_max_shmem_instruments,
+		30000, 0, 1048576, NULL, NULL
 	},
 
 	{
