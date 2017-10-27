@@ -1069,7 +1069,7 @@ ExecProcNode(PlanState *node)
 	if(!node->fHadSentMetrics)
 	{
 		/* GPDB send query metrics packet for node start executing */
-		UpdateNodeMetricsInfoPkt(node, Node_Executing);
+		UpdateNodeMetricsInfoPkt(node, METRICS_NODE_EXECUTING);
 		node->fHadSentMetrics = true;
 	}
 
@@ -1870,7 +1870,7 @@ ExecEndNode(PlanState *node)
 	}
 
 	/* GPDB send query metrics packet for node finish */
-	UpdateNodeMetricsInfoPkt(node, Node_Finished);
+	UpdateNodeMetricsInfoPkt(node, METRICS_NODE_FINISHED);
 
 	if (node->instrument)
 		node->instrument = InstrShmemRecycle(node->instrument);
